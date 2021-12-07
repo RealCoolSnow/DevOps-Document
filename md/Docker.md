@@ -33,6 +33,8 @@
     docker rmi <image>:<tag>
     # Show metadata for an image
     docker inspect <image>
+    # Remove all stopped containers
+    docker container prune
     # Remove all unused docker images
     docker image prune
 
