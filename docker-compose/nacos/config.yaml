@@ -6,7 +6,7 @@ services:
     environment:
     - MODE=standalone
     volumes:
-    - ./logs:/home/nacos/logs
-    - ./custom.properties:/home/nacos/init.d/custom.properties
+    - ./docker-data/logs:/home/nacos/logs
+    - ./docker-data/custom.properties:/home/nacos/init.d/custom.properties
     ports:
     - "8848:8848" # http://localhost:8848/nacos 账号默认nacos、密码默认nacos

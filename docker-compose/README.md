@@ -1,6 +1,6 @@
 ```bash
 #启动
-docker-compose -f file.yaml up
+docker-compose -f file.yaml up -d
 #关闭
 docker-compose -f file.yaml stop
 #移除

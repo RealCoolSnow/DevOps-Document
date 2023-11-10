@@ -19,7 +19,7 @@ services:
     volumes:
       - ./master.sh:/docker-entrypoint-initdb.d/master.sh
       - ./master.cnf:/etc/my.cnf
-      - ./master-data:/var/lib/mysql
+      - ./docker-data/master:/var/lib/mysql
     restart: always
     networks:
       shardingSphere:
@@ -43,7 +43,7 @@ services:
     volumes:
       - ./slave.sh:/docker-entrypoint-initdb.d/slave.sh
       - ./slave.cnf:/etc/my.cnf
-      - ./slave-data:/var/lib/mysql
+      - ./docker-data/slave:/var/lib/mysql
     restart: always
     networks:
       shardingSphere:
