@@ -1,10 +1,10 @@
 ```bash
 #启动
-docker-compose -f file.yaml up -d
+docker-compose -f config.yaml up -d
 #关闭
-docker-compose -f file.yaml stop
+docker-compose -f config.yaml stop
 #移除
-docker-compose -f file.yaml rm
+docker-compose -f config.yaml rm
 #关闭并移除
-docker-compose -f file.yaml down
+docker-compose -f config.yaml down
 ```
