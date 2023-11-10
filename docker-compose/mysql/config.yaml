@@ -1,0 +1,58 @@
+services:
+  mysql-master:
+    image: "mysql/mysql-server:latest"
+    ports:
+      - "13306:3306"
+    container_name: mysql-master
+    environment:
+      MYSQL_ROOT_PASSWORD: admin123456
+      MYSQL_ROOT_HOST: '%'
+      MYSQL_DATABASE: 'db_hr'
+      MYSQL_ALLOW_EMPTY_PASSWORD: 'no'
+      MASTER_SYNC_USER: syncuser
+      MASTER_SYNC_PASSWORD: sync123456
+      SYNC_ALLOW_HOST: '%'
+      R_W_USER: rw_user
+      R_W_USER_PASSWORD: rw123456
+      R_W_USER_HOST: '%'
+      R_W_DATABASE: '*'
+    volumes:
+      - ./master.sh:/docker-entrypoint-initdb.d/master.sh
+      - ./master.cnf:/etc/my.cnf
+      - ./master-data:/var/lib/mysql
+    restart: always
+    networks:
+      shardingSphere:
+        ipv4_address: 192.168.0.100
+  mysql-slave:
+    image: "mysql/mysql-server:latest"
+    ports:
+      - "13307:3306"
+    container_name: mysql-slave
+    environment:
+      MYSQL_ROOT_PASSWORD: admin123456
+      MYSQL_DATABASE: 'db_hr'
+      MYSQL_ALLOW_EMPTY_PASSWORD: 'no'
+      MASTER_HOST: 192.168.0.100
+      MASTER_PORT: 3306
+      MASTER_SYNC_USER: syncuser
+      MASTER_SYNC_PASSWORD: sync123456
+      R_USER: r_user
+      R_USER_PASSWORD: r123456
+      R_USER_HOST: '%'
+    volumes:
+      - ./slave.sh:/docker-entrypoint-initdb.d/slave.sh
+      - ./slave.cnf:/etc/my.cnf
+      - ./slave-data:/var/lib/mysql
+    restart: always
+    networks:
+      shardingSphere:
+        ipv4_address: 192.168.0.101
+    depends_on:
+      - mysql-master
+networks:
+  shardingSphere:
+    ipam:
+      driver: default
+      config:
+        - subnet: "192.168.0.0/24"
