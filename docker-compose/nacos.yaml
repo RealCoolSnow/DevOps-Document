@@ -1,0 +1,12 @@
+version: "2"
+services:
+  nacos:
+    image: nacos/nacos-server:v2.2.3-slim #nacos/nacos-server:latest
+    container_name: nacos
+    environment:
+    - MODE=standalone
+    volumes:
+    - /root/nacos/logs:/home/nacos/logs
+    -  /root/nacos/init.d/custom.properties:/home/nacos/init.d/custom.properties
+    ports:
+    - "8848:8848" # http://localhost:8848/nacos 账号默认nacos、密码默认nacos
