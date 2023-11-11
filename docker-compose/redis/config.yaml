@@ -11,7 +11,7 @@ services:
     environment:
       TZ: Asia/Shanghai
     volumes:
-      - ./docker-data:/usr/local/redis/data
-      - ./docker-conf/redis.conf:/usr/local/redis/conf/redis.conf
-      - ./docker-logs:/usr/local/redis/logs
+      - ./docker-data/data:/usr/local/redis/data
+      - ./docker-data/conf/redis.conf:/usr/local/redis/conf/redis.conf
+      - ./docker-data/logs:/usr/local/redis/logs
     command: ["redis-server","/usr/local/redis/conf/redis.conf"]
