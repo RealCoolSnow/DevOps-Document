@@ -11,3 +11,7 @@
 ## 备份全部数据库
     pg_dumpall -U username > output.sql
     docker exec -t <container_id> pg_dumpall  -U postgres > ~/backup.sql
+
+# 恢复数据库
+    psql -U postgres -f ~/backup.sql
+    docker exec -t <container_id> psql -U postgres -f ~/backup.sql
