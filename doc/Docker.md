@@ -83,7 +83,9 @@
     docker system info
     # Show docker disk space used
     docker system df
-
+    # 查看容器虚拟IP
+    docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' <container_id>
+    
 ## Docker Compose
     # Start your docker-compose defined resources in detached mode
     docker-compose up -d -f <docker_compose_yaml>
